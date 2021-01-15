@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <form [formGroup]="workerForm">
+        <div class="form-group">
+            <label for="workername">Имя</label>
+            <input
+              type="text"
+              class="form-control"
+              id="workername"
+              placeholder="Имя"
+              formControlName="name"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['name'].invalid && workerForm.controls['name'].touched">
+                Не указано имя
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workersurname">Фамилия</label>
+            <input
+              type="text"
+              class="form-control"
+              id="workersurname"
+              placeholder="Фамилия"
+              formControlName="surname"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['surname'].invalid && workerForm.controls['surname'].touched">
+                Не указана фамилия
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workerpatron">Отчество</label>
+            <input
+              type="text"
+              class="form-control"
+              id="workerpatron"
+              placeholder="Отчество"
+              formControlName="patronymic"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['patronymic'].invalid && workerForm.controls['patronymic'].touched">
+                Не указано отчество
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workerphone">Телефон</label>
+            <input
+              type="phone"
+              class="form-control"
+              id="workerphone"
+              placeholder="Телефон"
+              formControlName="phone"
+              [textMask]="{mask: mask}"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['phone'].invalid && workerForm.controls['phone'].touched">
+                Не указан номер телефона
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workeremail">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="workeremail"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['email'].invalid && workerForm.controls['email'].touched">
+                Не указан email
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workerbirth">Дата рождения</label>
+            <input
+              type="date"
+              class="form-control"
+              id="workerbirth"
+              placeholder="Дата рождения"
+              formControlName="birth"
+            />
+            <div class="alert alert-danger" 
+            *ngIf="workerForm.controls['birth'].invalid && workerForm.controls['birth'].touched">
+                Не указана дата рождения
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workertype">Отдел</label>
+            <select id="workertype" class="custom-select"  formControlName="type">   
+              <option [ngValue]="myWorkerType.it">IT отдел</option>
+              <option [ngValue]="myWorkerType.sales">Отдел продаж</option>
+              <option [ngValue]="myWorkerType.delivery">Отдел доставки</option>
+              <option [ngValue]="myWorkerType.lawyers">Юридический отдел</option>
+            </select>
+          </div>
+          <button class="btn btn-primary mr-4" [disabled]="workerForm.invalid" (click)="onSave()">
+            Сохранить
+          </button>
+          <button class="btn btn-danger" *ngIf="id != null" (click)="onDelete()">Удалить</button>
+            
+    </form>
+</div>

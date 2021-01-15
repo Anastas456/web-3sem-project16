@@ -1,0 +1,64 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-12">
+      <h5>Поиск по имени и фамилии</h5>
+      <input type="text" 
+      class="form-control" 
+      placeholder="Введите имя или фамилию"
+      [(ngModel)]="searchStr">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h5>Сортировка</h5>
+        <select class="custom-select col-3 mr-3" [(ngModel)]="sorting">   
+          <option value="byId">По id</option>
+          <option value="byAge">По возрасту</option>
+        </select>
+        <select class="custom-select col-3" [(ngModel)]="reverse">   
+          <option [ngValue]="false">От меньшего к большему</option>
+          <option [ngValue]="true">От большего к меньшему</option>
+        </select>
+    </div>
+    
+  </div>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Возраст</th>
+        <th scope="col">Отдел</th>
+        <th scope="col" class="text-right">
+            <button class="btn btn-primary"
+            (click)="onAddProfile()">
+                Добавить работника
+            </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let worker of workers | searchWorker:searchStr | sortWorkers:sorting:reverse">
+        <th scope="row">{{worker.id}}</th>
+        <td>{{worker.name}}</td>
+        <td>{{worker.surname}}</td>
+        <td>{{worker.birth | workerAge}}</td>
+        <td>{{worker.type | workerDepartment}}</td>
+
+        <td class="text-right">
+            <button class="btn btn-primary mr-3"
+            (click)="onLinkProfile(worker.id)">
+                Редактировать
+            </button>
+            <button class="btn btn-danger"
+                (click)="onDeleteList(worker.id)">
+                Удалить
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
